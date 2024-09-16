@@ -22,3 +22,6 @@ tasks {
         dependsOn(shadowJar)
     }
 }
+
+
+
