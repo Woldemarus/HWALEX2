@@ -1,7 +1,15 @@
 rootProject.name = "HomeWorkJava2"
 
 include("Theme2PersistenceAndSerialization")
+include("Theme3JavaNIO21")
+include("Theme3JavaNIO22")
+include("Theme3JavaNIO23")
+include("Theme3JavaNIO24")
 
+include("Theme4JavaThreads1")
+include("Theme4JavaThreads2")
+include("Theme4JavaThreads3")
+include("Theme4JavaThreads4")
 
 pluginManagement {
     val jgitver: String by settings

@@ -9,6 +9,7 @@ public class Vector {
 
     private List<Double> coord = new ArrayList<>();
 
+    //конструктор
     public Vector(List<Double> _vector) {
         this.dim = _vector.get(0).intValue();
         coord = new ArrayList<>();

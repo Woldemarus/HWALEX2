@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringTokenizer;
 
+//Класс с функциями вектора
 public class Vectors {
 
     // Метод умножения вектора на скаляр

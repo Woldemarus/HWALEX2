@@ -18,6 +18,7 @@ public class Main {
     public static void main(final String[] args) throws IOException {
         System.out.println("Theme2 - Persistence @ Serialization");
 
+
         try {
             //  ---
             //  Пример использования методов с потоками System.in и System.out
@@ -173,5 +174,78 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+
+
+        //  ---
+        //  Сериализация и десериализация классов ArrayVector и LinkedListVector
+        System.out.println("---------------------------------");
+        System.out.println("Сериализация и десериализация классов ArrayVector и LinkedListVector");
+        System.out.println("---------------------------------");
+        //  ---
+
+        // Создание и инициализация объектов
+        ArrayVector arrayVector = new ArrayVector(3);
+        arrayVector.setElement(0, 1.1);
+        arrayVector.setElement(1, 2.2);
+        arrayVector.setElement(2, 3.3);
+
+        LinkedListVector linkedListVector = new LinkedListVector();
+        linkedListVector.addElement(4.4);
+        linkedListVector.addElement(5.5);
+        linkedListVector.addElement(6.6);
+
+        // Сериализация объектов
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("vectors.ser"))) {
+            oos.writeObject(arrayVector);
+            oos.writeObject(linkedListVector);
+            System.out.println("Объекты успешно сериализованы.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Десериализация объектов
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("vectors.ser"))) {
+            ArrayVector deserializedArrayVector = (ArrayVector) ois.readObject();
+            LinkedListVector deserializedLinkedListVector = (LinkedListVector) ois.readObject();
+
+            // Сравнение исходных и десериализованных объектов
+            System.out.println("Исходный ArrayVector: " + arrayVector);
+            System.out.println("Десериализованный ArrayVector: " + deserializedArrayVector);
+
+            System.out.println("Исходный LinkedListVector: " + linkedListVector);
+            System.out.println("Десериализованный LinkedListVector: " + deserializedLinkedListVector);
+
+            System.out.println("ArrayVector равен десериализованному: " + arrayVector.toString().equals(deserializedArrayVector.toString()));
+            System.out.println("LinkedListVector равен десериализованному: " + linkedListVector.toString().equals(deserializedLinkedListVector.toString()));
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        //  ---
+        //  Сериализация и десериализация объекта класса в отдельном классе
+        System.out.println("---------------------------------");
+        System.out.println("Сериализация и десериализация в отдельном классах");
+        System.out.println("---------------------------------");
+        //  ---
+        String fileName = "myObject1.ser";
+
+        // Создание объекта
+        MyClassToBePersisted myObject = new MyClassToBePersisted("Profile1", "GroupA");
+
+        SerializeMyClassToBePersisted.serialize(myObject, fileName);
+
+        // Десериализация объекта
+        MyClassToBePersisted deserializedObject = DeserializeMyClassToBePersisted.deserialize(fileName);
+        // Сравнение исходного и десериализованного объекта
+        System.out.println("Исходный объект         : " + myObject);
+        System.out.println("Десериализованный объект: " + deserializedObject);
+        System.out.println("Объекты равны: " + myObject.equals(deserializedObject));
     }
 }
